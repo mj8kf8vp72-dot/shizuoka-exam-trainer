@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#5b5bd6">
+<title>静岡高校入試トレーナー</title>
+<style>
+:root{--ink:#20233a;--muted:#70758a;--bg:#f5f6fb;--card:#fff;--brand:#5b5bd6;--brand2:#8585f2;--line:#e5e7f0;--good:#16865b;--bad:#c34c56;--soft:#eeefff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;line-height:1.55}
+button,select{font:inherit}button{cursor:pointer} .app{max-width:760px;margin:0 auto;min-height:100vh;padding:0 16px 32px}
+header{padding:22px 2px 16px;display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--brand),#9292ff);display:grid;place-items:center;color:white;font-size:22px;font-weight:800;box-shadow:0 6px 16px #5b5bd633}.brand h1{font-size:18px;margin:0;letter-spacing:.01em}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
+.pill{margin-left:auto;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:11px;color:var(--muted)}
+.hero{background:linear-gradient(135deg,#5555cf,#8282ee);border-radius:24px;padding:22px;color:#fff;position:relative;overflow:hidden;box-shadow:0 10px 26px #5b5bd626}.hero:after{content:"";position:absolute;width:170px;height:170px;border:25px solid #ffffff17;border-radius:50%;right:-52px;top:-55px}.eyebrow{font-size:11px;letter-spacing:.12em;opacity:.8;font-weight:700}.hero h2{font-size:23px;line-height:1.35;margin:7px 0}.hero p{font-size:13px;opacity:.9;margin:8px 0 0;max-width:460px}
+.section-title{font-size:16px;margin:24px 2px 12px;font-weight:800;display:flex;align-items:center;justify-content:space-between}.section-title small{font-weight:500;color:var(--muted);font-size:11px}
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mode-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:left;min-height:138px;color:var(--ink);transition:.15s}.mode-card:active,.subject:active,.choice:active{transform:scale(.985)}.mode-icon{font-size:25px;margin-bottom:8px}.mode-card strong{display:block;font-size:15px}.mode-card span{display:block;color:var(--muted);font-size:12px;margin-top:4px}.tag{display:inline-block;font-size:10px;color:var(--brand);background:var(--soft);border-radius:6px;padding:3px 6px;margin-top:10px;font-weight:700}
+.subjects{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.subject{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 4px 10px;text-align:center;color:var(--ink);min-width:0}.subject .emoji{font-size:22px;display:block;margin-bottom:4px}.subject strong{font-size:12px;display:block}.subject small{font-size:10px;color:var(--muted)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:14px}.controls{display:flex;gap:10px;flex-wrap:wrap}.controls label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}.controls select{border:1px solid var(--line);border-radius:11px;padding:10px;background:#fff;color:var(--ink);width:100%}.field{flex:1;min-width:130px}
+.primary,.secondary,.quiet{border:0;border-radius:13px;padding:13px 16px;font-weight:750}.primary{background:var(--brand);color:#fff;box-shadow:0 5px 12px #5b5bd626}.secondary{background:var(--soft);color:var(--brand)}.quiet{background:#f2f3f8;color:var(--muted)}.full{width:100%;margin-top:14px}
+.note{font-size:11px;color:var(--muted);line-height:1.6;margin:12px 2px}.screen{display:none}.screen.active{display:block}.back{border:0;background:transparent;color:var(--brand);padding:10px 0;font-weight:700}
+.quiz-top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px;margin:8px 0 12px}.progress{height:6px;background:#e8e9f5;border-radius:20px;overflow:hidden;margin-bottom:18px}.progress span{display:block;height:100%;background:var(--brand);width:0;transition:width .2s}
+.question-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px}.q-label{font-size:11px;color:var(--brand);font-weight:800;letter-spacing:.04em}.question{font-size:20px;font-weight:800;line-height:1.55;margin:12px 0 18px;white-space:pre-wrap}.choices{display:grid;gap:10px}.choice{display:flex;align-items:center;gap:12px;text-align:left;width:100%;border:1px solid var(--line);background:#fff;padding:13px;border-radius:14px;color:var(--ink);font-size:14px}.letter{width:30px;height:30px;flex:0 0 30px;border-radius:9px;background:#f1f2fa;display:grid;place-items:center;font-weight:800;color:#6266a8}.choice.selected{border-color:var(--brand);background:#f7f7ff}.choice.correct{border-color:#8bd4b3;background:#effbf5}.choice.wrong{border-color:#f0a0a5;background:#fff3f3}.feedback{display:none;margin-top:14px;padding:14px;border-radius:14px;font-size:13px}.feedback.show{display:block}.feedback.good{background:#effbf5;color:#145e42}.feedback.bad{background:#fff3f3;color:#92343d}.feedback strong{display:block;margin-bottom:4px}.quiz-actions{display:flex;gap:10px;margin-top:14px}.quiz-actions button{flex:1}
+.result-score{font-size:42px;font-weight:900;color:var(--brand);text-align:center;margin:12px 0 0}.result-sub{text-align:center;color:var(--muted);font-size:13px}.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}.stat{background:#f7f7fc;border-radius:13px;padding:12px 6px;text-align:center}.stat strong{font-size:20px;display:block}.stat span{font-size:10px;color:var(--muted)}
+.review-item{border:1px solid var(--line);border-radius:13px;padding:12px;margin-top:9px;font-size:12px}.review-item strong{display:block;font-size:13px;margin-bottom:4px}.review-item .ans{color:var(--bad)}.review-item .right{color:var(--good)}
+.history-row{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px}.history-row:last-child{border-bottom:0}.empty{padding:18px;text-align:center;color:var(--muted);font-size:13px}
+footer{padding:26px 2px 8px;text-align:center;color:#9a9db0;font-size:10px}
+@media(max-width:400px){.app{padding:0 12px 24px}.hero{padding:18px}.hero h2{font-size:21px}.subjects{gap:5px}.subject{padding:10px 2px}.subject strong{font-size:11px}.question{font-size:18px}.pill{font-size:10px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="logo">S</div>
+  <div class="brand"><h1>静岡高校入試トレーナー</h1><p>過去問 × 類題トレーニング</p></div>
+  <div class="pill">試作版 0.1</div>
+</header>
+
+<main id="home" class="screen active">
+  <section class="hero">
+    <div class="eyebrow">YOUR EXAM, YOUR PACE</div>
+    <h2>一問ずつ、できるを増やそう。</h2>
+    <p>過去問で実力チェック。類題で苦手を克服。今日の一歩から始めよう。</p>
+  </section>
+  <div class="section-title">学習モード <small>まずは体験問題で動作確認</small></div>
+  <div class="mode-grid">
+    <button class="mode-card" onclick="openSetup('past')"><div class="mode-icon">📘</div><strong>過去問モード</strong><span>年度・教科を選んで演習</span><div class="tag">実戦力をつける</div></button>
+    <button class="mode-card" onclick="openSetup('similar')"><div class="mode-icon">✨</div><strong>類題トレーニング</strong><span>分野別の練習問題に挑戦</span><div class="tag">苦手を克服する</div></button>
+  </div>
+  <div class="section-title">教科から選ぶ <small>全5教科</small></div>
+  <div class="subjects">
+    <button class="subject" onclick="quickStart('国語')"><span class="emoji">📖</span><strong>国語</strong><small>読解など</small></button>
+    <button class="subject" onclick="quickStart('数学')"><span class="emoji">📐</span><strong>数学</strong><small>計算など</small></button>
+    <button class="subject" onclick="quickStart('英語')"><span class="emoji">🔤</span><strong>英語</strong><small>文法など</small></button>
+    <button class="subject" onclick="quickStart('理科')"><span class="emoji">🧪</span><strong>理科</strong><small>基礎など</small></button>
+    <button class="subject" onclick="quickStart('社会')"><span class="emoji">🌏</span><strong>社会</strong><small>地理など</small></button>
+  </div>
+  <div class="section-title">学習の記録 <small>この端末内に保存</small></div>
+  <div class="panel">
+    <div class="stat-grid" style="margin-top:0">
+      <div class="stat"><strong id="totalSessions">0</strong><span>挑戦回数</span></div>
+      <div class="stat"><strong id="overallRate">—</strong><span>全体正答率</span></div>
+      <div class="stat"><strong id="wrongCount">0</strong><span>復習候補</span></div>
+    </div>
+    <button class="secondary full" onclick="showHistory()">学習履歴を見る</button>
+  </div>
+  <p class="note">※現在の問題は操作確認用のオリジナル例題です。静岡県の実際の過去問ではありません。実際の過去問PDF・正答を登録するときに、紙・ペンなしで解ける問題と机で解く問題を分類する設計です。</p>
+</main>
+
+<main id="setup" class="screen">
+  <button class="back" onclick="goHome()">← ホームへ戻る</button>
+  <section class="panel">
+    <div class="eyebrow" style="color:var(--brand)" id="setupEyebrow">QUIZ SETUP</div>
+    <h2 id="setupTitle" style="margin:5px 0 16px">演習を設定</h2>
+    <div class="controls">
+      <div class="field"><label for="subjectSelect">教科</label><select id="subjectSelect"><option>国語</option><option>数学</option><option>英語</option><option>理科</option><option>社会</option></select></div>
+      <div class="field" id="yearField"><label for="yearSelect">年度</label><select id="yearSelect"><option value="2026">令和8年度（2026）</option><option value="2025">令和7年度（2025）</option><option value="2024">令和6年度（2024）</option></select></div>
+    </div>
+    <div class="controls" style="margin-top:12px">
+      <div class="field"><label for="paceSelect">出題タイプ</label><select id="paceSelect"><option value="quick">すきま時間（紙・ペンなし）</option><option value="deep">じっくり演習</option><option value="all">すべて</option></select></div>
+      <div class="field"><label for="countSelect">問題数</label><select id="countSelect"><option value="5">5問</option><option value="3">3問</option><option value="10">10問（例題を追加予定）</option></select></div>
+      <div class="field"><label for="difficultySelect">難易度</label><select id="difficultySelect"><option value="all">すべて</option><option value="basic">基礎</option><option value="standard">標準</option></select></div>
+    </div>
+    <p class="note" id="setupNote">問題ごとに「すきま時間」「じっくり演習」のタグを付けて出題を切り替えます。現在は動作確認用の例題です。</p>
+    <button class="primary full" onclick="startQuiz()">演習を始める →</button>
+  </section>
+</main>
+
+<main id="quiz" class="screen">
+  <button class="back" onclick="confirmExit()">← 演習を終了</button>
+  <div class="quiz-top"><span id="quizMeta">数学・例題</span><span id="quizProgressText">1 / 5</span></div>
+  <div class="progress"><span id="progressBar"></span></div>
+  <section class="question-card">
+    <div class="q-label" id="questionLabel">QUESTION 01</div>
+    <div class="question" id="questionText"></div>
+    <div class="choices" id="choices"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="quiz-actions">
+      <button class="quiet" id="hintButton" onclick="showHint()">ヒントを見る</button>
+      <button class="primary" id="nextButton" onclick="nextQuestion()" disabled>回答する</button>
+    </div>
+  </section>
+  <p class="note">選んだ答えを確認してから「回答する」を押してね。</p>
+</main>
+
+<main id="result" class="screen">
+  <button class="back" onclick="goHome()">← ホームへ戻る</button>
+  <section class="panel">
+    <div style="text-align:center;font-size:35px">🎉</div>
+    <h2 style="text-align:center;margin:4px 0">演習おつかれさま！</h2>
+    <div class="result-score" id="resultScore">0 / 0</div>
+    <div class="result-sub" id="resultPercent">正答率 0%</div>
+    <div class="stat-grid">
+      <div class="stat"><strong id="correctStat">0</strong><span>正解</span></div>
+      <div class="stat"><strong id="wrongStat">0</strong><span>間違い</span></div>
+      <div class="stat"><strong id="timeStat">—</strong><span>問題数</span></div>
+    </div>
+    <h3 style="font-size:15px;margin:20px 0 8px">復習リスト</h3>
+    <div id="reviewList"></div>
+    <button class="primary full" onclick="retryWrong()">間違えた問題をもう一度</button>
+    <button class="secondary full" onclick="goHome()">ホームへ戻る</button>
+  </section>
+</main>
+
+<main id="history" class="screen">
+  <button class="back" onclick="goHome()">← ホームへ戻る</button>
+  <section class="panel">
+    <h2 style="margin-top:0">学習履歴</h2>
+    <div id="historyList"></div>
+    <button class="quiet full" onclick="clearHistory()">この端末の履歴を消去</button>
+  </section>
+</main>
+<footer>静岡高校入試トレーナー · 試作版<br>学習用の試作品です。実際の入試問題・正答は確認後に登録してください。</footer>
+</div>
+<script>
+const bank = {
+  "数学":[
+    {id:"m1",subject:"数学",topic:"一次方程式",difficulty:"basic",pace:"quick",q:"方程式 3x − 5 = 10 の解はどれ？",options:["x = 3","x = 5","x = 7","x = 15"],answer:1,explain:"両辺に5を足すと3x = 15。両辺を3で割って x = 5 です。",hint:"まず両辺に同じ数を足して、xの項だけに近づけよう。"},
+    {id:"m2",subject:"数学",topic:"比例",difficulty:"basic",pace:"quick",q:"y が x に比例し、x = 3 のとき y = 12 です。比例定数はいくつ？",options:["3","4","9","36"],answer:1,explain:"比例の式は y = ax。12 = 3a なので a = 4 です。",hint:"比例の式 y = ax に、わかっている x と y を代入しよう。"},
+    {id:"m3",subject:"数学",topic:"平方根",difficulty:"standard",pace:"quick",q:"√49 − √9 の値はどれ？",options:["2","4","6","40"],answer:1,explain:"√49 = 7、√9 = 3 なので、7 − 3 = 4 です。",hint:"それぞれの平方根を先に求めてから引き算しよう。"},
+    {id:"m4",subject:"数学",topic:"確率",difficulty:"standard",pace:"deep",q:"1から6までの目が同じ確率で出るさいころを1回投げる。偶数の目が出る確率は？",options:["1/6","1/3","1/2","2/3"],answer:2,explain:"偶数は2・4・6の3通り。全6通りなので3/6 = 1/2です。",hint:"偶数に当てはまる目が何個あるか数えよう。"},
+    {id:"m5",subject:"数学",topic:"展開",difficulty:"basic",pace:"quick",q:"(x + 2)(x + 3) を展開した式はどれ？",options:["x² + 5x + 6","x² + 6x + 5","x² + x + 6","x² + 5"],answer:0,explain:"x×x、x×3、2×x、2×3を足すと x² + 5x + 6 です。",hint:"それぞれのかっこの中の項を、もれなく掛け合わせよう。"}
+  ],
+  "英語":[
+    {id:"e1",subject:"英語",topic:"三人称単数",difficulty:"basic",pace:"quick",q:"空欄に入る最も適切な語は？ She (　) tennis every Sunday.",options:["play","plays","playing","played"],answer:1,explain:"主語が She で現在の習慣を表すため、一般動詞に s をつけた plays を使います。",hint:"主語が he / she / it の現在形では、動詞の形に注意しよう。"},
+    {id:"e2",subject:"英語",topic:"過去形",difficulty:"basic",pace:"quick",q:"「私は昨日、図書館へ行きました。」の英訳として正しいものは？",options:["I go to the library yesterday.","I went to the library yesterday.","I gone to the library yesterday.","I going to the library yesterday."],answer:1,explain:"yesterday は過去を表す語なので、go の過去形 went を使います。",hint:"文の中にある yesterday が時制の手がかりだよ。"},
+    {id:"e3",subject:"英語",topic:"比較",difficulty:"standard",pace:"quick",q:"「この本はあの本よりおもしろい。」に合う英文は？",options:["This book is interesting than that one.","This book is more interesting than that one.","This book is most interesting than that one.","This book more interesting that one."],answer:1,explain:"interesting のような長めの形容詞の比較級は more interesting とします。",hint:"長めの形容詞を比べるときの形を思い出そう。"}
+  ],
+  "国語":[
+    {id:"j1",subject:"国語",topic:"ことばの意味",difficulty:"basic",pace:"quick",q:"「慎重」の意味として最も近いものはどれ？",options:["よく考え、注意深く行動すること","すばやく行動すること","大きな声で話すこと","人に頼らず進めること"],answer:0,explain:"慎重は、軽々しく判断せず、注意深く物事を行うことです。",hint:"失敗しないように、よく確かめてから行動する様子を考えよう。"},
+    {id:"j2",subject:"国語",topic:"接続語",difficulty:"standard",pace:"quick",q:"「雨が降っていた。＿＿、試合は予定どおり行われた。」空欄に最も適切な接続語は？",options:["だから","しかし","つまり","たとえば"],answer:1,explain:"雨が降っていたことと試合が行われたことは逆接の関係なので「しかし」が適切です。",hint:"前後の文が反対の内容になっているかを確認しよう。"}
+  ],
+  "理科":[
+    {id:"s1",subject:"理科",topic:"電流",difficulty:"basic",pace:"quick",q:"電圧6V、抵抗3Ωの抵抗に流れる電流は何A？",options:["0.5A","2A","3A","18A"],answer:1,explain:"オームの法則より電流 I = 電圧 V ÷ 抵抗 R。6 ÷ 3 = 2Aです。",hint:"電圧・電流・抵抗の関係を使い、単位も確認しよう。"},
+    {id:"s2",subject:"理科",topic:"植物",difficulty:"basic",pace:"quick",q:"植物が光合成を行うとき、主に取り入れる気体はどれ？",options:["酸素","窒素","二酸化炭素","水素"],answer:2,explain:"光合成では二酸化炭素と水を材料に、光エネルギーを使って養分などをつくります。",hint:"植物が養分をつくるとき、空気中から取り込む気体を考えよう。"}
+  ],
+  "社会":[
+    {id:"c1",subject:"社会",topic:"日本の地理",difficulty:"basic",pace:"quick",q:"日本で最も面積が大きい都道府県はどれ？",options:["岩手県","長野県","北海道","新潟県"],answer:2,explain:"日本で最も面積が大きい都道府県は北海道です。",hint:"日本の北に位置する、広大な面積を持つ都道府県を思い出そう。"},
+    {id:"c2",subject:"社会",topic:"歴史",difficulty:"standard",pace:"quick",q:"鎌倉幕府を開いた人物は誰？",options:["平清盛","源頼朝","足利尊氏","徳川家康"],answer:1,explain:"源頼朝は鎌倉を拠点に武家政権を築きました。",hint:"鎌倉時代の始まりと結びつく源氏の人物だよ。"}
+  ]
+};
+const $=id=>document.getElementById(id);
+let mode="past", questions=[], idx=0, chosen=null, answers=[], retryPool=null, startAt=0;
+function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));$(id).classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}
+function goHome(){showScreen("home");updateDashboard();}
+function openSetup(which){mode=which;retryPool=null;$("setupTitle").textContent=which==="past"?"過去問モード":"類題トレーニング";$("setupEyebrow").textContent=which==="past"?"PAST EXAM PRACTICE":"SIMILAR QUESTION TRAINING";$("yearField").style.display=which==="past"?"block":"none";$("setupNote").textContent=which==="past"?"現在は動作確認用の例題を出題します。実際の過去問データはPDF登録機能の追加後に利用できます。":"現在は分野別のオリジナル例題を出題します。将来は間違えた問題をもとにAI類題を生成します。";showScreen("setup");}
+function quickStart(subject){openSetup("similar");$("subjectSelect").value=subject;}
+function startQuiz(){
+ const subject=$("subjectSelect").value, diff=$("difficultySelect").value, count=+$("countSelect").value;
+ const pace=$("paceSelect").value;
+ let pool=(retryPool||bank[subject]||[]).filter(q=>(diff==="all"||q.difficulty===diff)&&(pace==="all"||q.pace===pace));
+ if(!pool.length && !retryPool){pool=(bank[subject]||[]).filter(q=>pace==="all"||q.pace===pace);}
+ if(!pool.length){alert("この条件の例題はまだありません。出題タイプや難易度を変更してね。");return;}
+ questions=pool.slice(0,count);
+ if(!questions.length){alert("この条件の例題はまだありません。別の教科を選んでね。");return;}
+ idx=0;chosen=null;answers=[];startAt=Date.now();renderQuestion();showScreen("quiz");
+}
+function renderQuestion(){
+ const q=questions[idx];chosen=null;
+ $("quizMeta").textContent=q.subject+"・"+(mode==="past"?"過去問モード（例題）":"類題モード");
+ $("quizProgressText").textContent=(idx+1)+" / "+questions.length;
+ $("progressBar").style.width=(idx/questions.length*100)+"%";
+ $("questionLabel").textContent="QUESTION "+String(idx+1).padStart(2,"0")+"  ·  "+q.topic;
+ $("questionText").textContent=q.q;
+ $("choices").innerHTML="";
+ q.options.forEach((opt,i)=>{const b=document.createElement("button");b.className="choice";b.innerHTML='<span class="letter">'+String.fromCharCode(65+i)+'</span><span></span>';b.lastChild.textContent=opt;b.onclick=()=>selectChoice(i);$("choices").appendChild(b);});
+ $("feedback").className="feedback";$("feedback").innerHTML="";
+ $("hintButton").disabled=false;$("hintButton").textContent="ヒントを見る";
+ $("nextButton").disabled=true;$("nextButton").textContent="回答する";
+}
+function selectChoice(i){if($("feedback").classList.contains("show"))return;chosen=i;[...$("choices").children].forEach((b,n)=>b.classList.toggle("selected",n===i));$("nextButton").disabled=false;}
+function showHint(){const q=questions[idx];$("feedback").className="feedback show";$("feedback").innerHTML="<strong>💡 ヒント</strong>"+escapeHTML(q.hint);$("hintButton").disabled=true;}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function nextQuestion(){
+ if(!$("feedback").classList.contains("show")){
+   if(chosen===null)return;
+   const q=questions[idx],correct=chosen===q.answer;
+   answers[idx]={q,chosen,correct};
+   [...$("choices").children].forEach((b,n)=>{b.disabled=true;if(n===q.answer)b.classList.add("correct");else if(n===chosen)b.classList.add("wrong");});
+   $("feedback").className="feedback show "+(correct?"good":"bad");
+   $("feedback").innerHTML="<strong>"+(correct?"⭕ 正解！":"❌ 不正解")+"</strong>"+escapeHTML(q.explain);
+   $("hintButton").disabled=true;$("nextButton").textContent=idx===questions.length-1?"結果を見る":"次の問題へ";
+   $("progressBar").style.width=((idx+1)/questions.length*100)+"%";
+ }else{
+   if(idx<questions.length-1){idx++;renderQuestion();}else showResult();
+ }
+}
+function showResult(){
+ const correct=answers.filter(a=>a&&a.correct).length, total=questions.length, wrong=total-correct, percent=Math.round(correct/total*100);
+ $("resultScore").textContent=correct+" / "+total;$("resultPercent").textContent="正答率 "+percent+"%";$("correctStat").textContent=correct;$("wrongStat").textContent=wrong;$("timeStat").textContent=total+"問";
+ const review=$("reviewList");review.innerHTML="";
+ answers.forEach((a,i)=>{if(!a||a.correct)return;const div=document.createElement("div");div.className="review-item";div.innerHTML="<strong>"+(i+1)+". "+escapeHTML(a.q.topic)+"</strong><div>"+escapeHTML(a.q.q)+"</div><div class='ans'>あなたの回答："+escapeHTML(a.q.options[a.chosen])+"</div><div class='right'>正解："+escapeHTML(a.q.options[a.q.answer])+"</div><div style='margin-top:5px'>"+escapeHTML(a.q.explain)+"</div>";review.appendChild(div);});
+ if(!wrong)review.innerHTML='<div class="empty">全問正解！この調子で続けよう 🎉</div>';
+ saveSession({date:new Date().toLocaleString("ja-JP",{month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}),subject:questions[0].subject,mode,correct,total,percent,wrongIds:answers.filter(a=>a&&!a.correct).map(a=>a.q.id)});
+ showScreen("result");
+}
+function getHistory(){try{return JSON.parse(localStorage.getItem("shizuokaExamHistory")||"[]")}catch(e){return []}}
+function saveSession(s){const h=getHistory();h.unshift(s);localStorage.setItem("shizuokaExamHistory",JSON.stringify(h.slice(0,50)));}
+function updateDashboard(){const h=getHistory();const total=h.reduce((n,x)=>n+x.total,0),correct=h.reduce((n,x)=>n+x.correct,0);$("totalSessions").textContent=h.length;$("overallRate").textContent=total?Math.round(correct/total*100)+"%":"—";$("wrongCount").textContent=h.reduce((n,x)=>n+(x.wrongIds||[]).length,0);}
+function showHistory(){const h=getHistory();$("historyList").innerHTML="";if(!h.length)$("historyList").innerHTML='<div class="empty">まだ学習履歴がありません。まずは1回挑戦してみよう。</div>';h.forEach(x=>{const d=document.createElement("div");d.className="history-row";d.innerHTML="<div><strong>"+escapeHTML(x.subject)+"</strong><br><span style='color:var(--muted);font-size:11px'>"+escapeHTML(x.date)+" · "+(x.mode==="past"?"過去問モード（例題）":"類題モード")+"</span></div><div style='text-align:right'><strong>"+x.correct+"/"+x.total+"問</strong><br><span style='color:var(--brand)'>"+x.percent+"%</span></div>";$("historyList").appendChild(d);});showScreen("history");}
+function clearHistory(){if(confirm("この端末に保存した学習履歴をすべて消去しますか？")){localStorage.removeItem("shizuokaExamHistory");showHistory();updateDashboard();}}
+function retryWrong(){const wrong=answers.filter(a=>a&&!a.correct).map(a=>a.q);if(!wrong.length){alert("間違えた問題はありません！");return;}retryPool=wrong;mode="similar";questions=wrong;idx=0;chosen=null;answers=[];startAt=Date.now();renderQuestion();showScreen("quiz");}
+function confirmExit(){if(confirm("演習を終了してホームに戻りますか？今回の途中経過は保存されません。"))goHome();}
+updateDashboard();
+</script>
+</body>
+</html>
